@@ -6,16 +6,21 @@ const VideoCardC = ({ info }) => {
   if (!info) return;
   const { snippet, statistics } = info;
   const { title, channelTitle, thumbnails } = snippet;
-  const { viewCount } = statistics;
+  // const { viewCount } = statistics;
   return (
-    <div className="p-2 m-2 shadow-md w-64 ">
+    <div className="p-2 m-2 shadow-md w-64  ">
       <div className="">
-        <img className="rounded-lg" src={thumbnails.medium.url} alt="" />
+        <img className="rounded-lg w-64" src={thumbnails.medium.url} alt="" />
       </div>
       <div>
-        <h1 className="font-bold py-2">{title}</h1>
+        <h1 className="font-bold py-2 h-20">
+          {/* {title.length > 60 ? title.substring(0, 60) + '...' : title} */}
+          {title.length > 50
+            ? title.substring(0, 50).replace(/\s+\S*$/, '') + '...'
+            : title}
+        </h1>
         <p>{channelTitle}</p>
-        <p>{viewCount + ' views'} </p>
+        {/* <p>{viewCount + ' views'} </p> */}
       </div>
     </div>
   );

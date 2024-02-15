@@ -1,54 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
-import { YOUTUBE_SEARCH_API } from '../utils/constant';
-import { cacheResults } from '../utils/searchSlice';
+import useSearch from '../hooks/useSearch';
 
 const Head = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchSuggestion, setSearchSuggestion] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-
-  const searchCache = useSelector((store) => store.search);
-
-  /***
-   *  searchCache = {
-   *    "iphone" : ["iphone2", "iphone11", "iphone12"]
-   *  }
-   *
-   *  searchQuery = iphone
-   */
-
-  // DEBOUNCING
-  useEffect(() => {
-    // API call
-    const timer = setTimeout(() => {
-      if (searchCache[searchQuery]) {
-        setSearchSuggestion(searchCache[searchQuery]);
-      } else {
-        getSearchSuggestions();
-      }
-    }, 200);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [searchQuery]);
-
-  const getSearchSuggestions = async () => {
-    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-    const json = await data.json();
-    setSearchSuggestion(json[1]);
-    // update the searchSlice for this new api call
-    dispatch(cacheResults({ [searchQuery]: json[1] }));
-  };
-  // DEBOUNCING
+  const {
+    searchQuery,
+    setSearchQuery,
+    showSuggestions,
+    setShowSuggestions,
+    searchSuggestion,
+    getVideos,
+  } = useSearch();
 
   const dispatch = useDispatch();
 
   const handleToggle = () => {
     dispatch(toggleMenu());
   };
+
+  const onClickHandler = (item) => {
+    console.log(item);
+    // setSearchQuery(item);
+  };
+
+  console.log({ searchQuery });
   return (
     <div className="grid grid-flow-col p-3 m-1   shadow-lg">
       <div className="flex col-span-1 py-1 cursor-pointer">
@@ -58,11 +34,13 @@ const Head = () => {
           className="h-8"
           onClick={handleToggle}
         />
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwGODoCWG12sFLdictA7wnOcoGgY0wjzZd9g&usqp=CAU"
-          alt="Youtube Logo"
-          className="h-8 mx-2 cursor-pointer"
-        />
+        <a href="/">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwGODoCWG12sFLdictA7wnOcoGgY0wjzZd9g&usqp=CAU"
+            alt="Youtube Logo"
+            className="h-8 mx-2 cursor-pointer"
+          />
+        </a>
       </div>
       <div className=" col-span-10  pl-52 pr-0 ">
         <div>
@@ -75,7 +53,10 @@ const Head = () => {
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
           />
-          <button className="w-10 border p-1  bg-gray-300  border-gray-700 rounded-r-3xl">
+          <button
+            className="w-10 border p-1  bg-gray-300  border-gray-700 rounded-r-3xl"
+            onClick={() => getVideos(searchQuery)}
+          >
             🔎
           </button>
         </div>
@@ -85,7 +66,8 @@ const Head = () => {
               {searchSuggestion.map((item, index) => (
                 <li
                   key={index}
-                  className="py-1 px-4 hover:bg-gray-300 font-semibold"
+                  className="py-1 px-4 hover:bg-gray-300 font-semibold cursor-pointer "
+                  onClick={() => onClickHandler(item)}
                 >
                   🔎 {item}
                 </li>
