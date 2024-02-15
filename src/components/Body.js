@@ -7,7 +7,7 @@ const Body = () => {
   const isShowSideBar = useSelector((store) => store.app.isMenuOpen);
   console.log(isShowSideBar);
   return (
-    <div className="flex">
+    <div className="grid grid-flow-col ">
       {isShowSideBar && <SideBar />}
       <Outlet />
     </div>
