@@ -26,7 +26,7 @@ const Head = () => {
 
   console.log({ searchQuery });
   return (
-    <div className="grid grid-flow-col p-3 m-1   shadow-lg">
+    <div className="grid grid-flow-col p-3 m-1   shadow-lg  sticky top-0 z-10 bg-white">
       <div className="flex col-span-1 py-1 cursor-pointer">
         <img
           src="https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp"

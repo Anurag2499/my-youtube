@@ -4,6 +4,7 @@ import VideoCardC from './VideoCardC';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setVideos } from '../utils/videoSlice';
+import Shimmer, { ButtonListShimmer, MainContainerShimmer } from './Shimmer';
 
 const VideoContainer = () => {
   // const [videos, setVideos] = useState([]);
@@ -22,6 +23,14 @@ const VideoContainer = () => {
     dispatch(setVideos(json.items));
     console.log('getvideo');
   };
+
+  if (!ytVideos) {
+    return (
+      <div>
+        <MainContainerShimmer />;
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-wrap">

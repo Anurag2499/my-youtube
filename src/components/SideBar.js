@@ -5,7 +5,7 @@ import { toggleMenu } from '../utils/appSlice';
 
 const SideBar = () => {
   return (
-    <div className="hidden md:block h-screen overflow-y-clip p-5 shadow-lg   min-h-screen overflow-hidden w-[240px]">
+    <div className=" hidden md:block h-screen overflow-y-clip p-5 shadow-lg   min-h-screen overflow-hidden w-[240px]">
       <ul className="text-sm">
         <li className="py-2 cursor-pointer">
           <Link className="flex items-center " to="/">

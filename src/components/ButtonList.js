@@ -1,25 +1,35 @@
 import React from 'react';
 import Button from './Button';
+import useSearch from '../hooks/useSearch';
 
 const NameList = [
   'All',
-  'Gaming',
+  'Coding',
+  'Basketball',
   'Comedy',
-  'Sports',
-  'SRK',
-  'Cricket',
-  'BasketBall',
+  'Music',
+  'KK Songs',
   'Football',
-  'Latest',
+  'MS Dhoni',
   'Rock',
   'Songs',
+  'Stephen Curry',
 ];
 
 const ButtonList = () => {
+  const { getVideos } = useSearch();
   return (
-    <div className="flex">
+    <div className="flex cursor-pointer">
       {NameList.map((name) => (
-        <Button key={name} name={name} />
+        <div
+          key={name}
+          onClick={() => {
+            console.log(name);
+            getVideos(name);
+          }}
+        >
+          <Button name={name} />
+        </div>
       ))}
     </div>
   );
