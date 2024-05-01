@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 const Body = () => {
   const isShowSideBar = useSelector((store) => store.app.isMenuOpen);
-  console.log(isShowSideBar);
+  // console.log(isShowSideBar);
   return (
     <div className="grid grid-flow-col ">
       {isShowSideBar && <SideBar />}

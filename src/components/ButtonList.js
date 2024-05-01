@@ -24,7 +24,7 @@ const ButtonList = () => {
         <div
           key={name}
           onClick={() => {
-            console.log(name);
+            // console.log(name);
             getVideos(name);
           }}
         >

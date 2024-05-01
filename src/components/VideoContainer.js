@@ -11,7 +11,7 @@ const VideoContainer = () => {
   const dispatch = useDispatch();
   const ytVideos = useSelector((store) => store.videos.newVideos);
   // console.log('ytv' + ytVideos);
-  console.log('VC called');
+  // console.log('VC called');
 
   useEffect(() => {
     getVideos();
@@ -21,7 +21,7 @@ const VideoContainer = () => {
     const data = await fetch(YOUTUBE_API_URL);
     const json = await data.json();
     dispatch(setVideos(json.items));
-    console.log('getvideo');
+    // console.log('getvideo');
   };
 
   if (!ytVideos) {
@@ -38,7 +38,6 @@ const VideoContainer = () => {
         ytVideos.map((video) => {
           const videoId =
             typeof video?.id === 'object' ? video?.id?.videoId : video?.id;
-          console.log(typeof video.id);
           return (
             <div key={videoId}>
               <Link to={'/watch?v=' + videoId}>

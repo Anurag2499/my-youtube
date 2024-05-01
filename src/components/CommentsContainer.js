@@ -59,7 +59,6 @@ const commentsData = [
 ];
 
 const Comment = ({ data }) => {
-  // console.log(data);
   const { name, text } = data;
   return (
     <div className="flex  bg-gray-200 my-2 rounded-lg border border-gray-300">
@@ -83,7 +82,6 @@ const CommentsList = ({ comments }) => {
     <div key={index}>
       <Comment data={comment} />
       <div className="ml-6 border border-l-gray-500 rounded-lg">
-        {console.log('reply - ' + comment.replies)}
         {comment?.replies && <CommentsList comments={comment.replies} />}
       </div>
     </div>

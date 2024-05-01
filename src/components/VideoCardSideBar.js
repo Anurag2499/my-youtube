@@ -2,7 +2,7 @@ import React from 'react';
 import { calculateDiff, generateCount } from '../utils/helper';
 
 const VideoCardSideBar = ({ info }) => {
-  console.log(info);
+  // console.log(info);
 
   if (!info) return;
   const { snippet } = info;
