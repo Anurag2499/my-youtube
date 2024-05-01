@@ -23,7 +23,7 @@ const useSearch = () => {
    *  searchQuery = iphone
    */
 
-  // DEBOUNCING
+  // DEBOUNCING (Used to Optimize Performance)
   useEffect(() => {
     // API call
     const timer = setTimeout(() => {
@@ -41,7 +41,9 @@ const useSearch = () => {
 
   const getSearchSuggestions = async () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    console.log(data);
     const json = await data.json();
+    console.log(json);
     setSearchSuggestion(json[1]);
     // update the searchSlice for this new api call
     dispatch(cacheResults({ [searchQuery]: json[1] }));
