@@ -45,7 +45,7 @@ const useSearch = () => {
     const json = await data.json();
     console.log(json);
     setSearchSuggestion(json[1]);
-    // update the searchSlice for this new api call
+    // update the searchSlice for this new api call and show it
     dispatch(cacheResults({ [searchQuery]: json[1] }));
   };
   // DEBOUNCING
